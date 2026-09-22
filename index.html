@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أسطول النقل العالمي | الشاحنات الثقيلة</title>
+    <!-- خطوط جوجل العالمية -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #FF5722;
+            --primary-hover: #E64A19;
+            --dark-bg: #0F172A;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 87, 34, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(15, 23, 42, 0.8) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* الهيدر وشريط التنقل */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 8%;
+            backdrop-filter: blur(12px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* قسم الواجهة الرئيسية Hero */
+        .hero {
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        /* قسم الأسطول والشاحنات */
+        .fleet-container {
+            padding: 40px 8% 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* بطاقة الشاحنة */
+        .truck-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .truck-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 30px rgba(255, 87, 34, 0.15);
+        }
+
+        .truck-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .truck-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border: 1px solid var(--glass-border);
+        }
+
+        .truck-content {
+            padding: 25px;
+        }
+
+        .truck-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .truck-specs {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+            padding: 10px 0;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .btn-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp:hover {
+            background: var(--primary-hover);
+        }
+
+        /* التجاوب مع الشاشات الصغيرة */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- الهيدر -->
+    <header>
+        <div class="logo">
+            <i class="fa-solid => fa-truck-moving" style="color: var(--primary);"></i>
+            GLOBAL<span>FLEET</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#fleet">الأسطول</a></li>
+                <li><a href="#about">من نحن</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- واجهة الترحيب -->
+    <section class="hero" id="home">
+        <h1>حلول النقل الثقيل الاحترافية</h1>
+        <p>نحن نوفر أحدث شاحنات النقل الدولي والداخلي بأعلى معايير الأمان والكفاءة. اختر شاحنتك واطلبها فوراً عبر الواتساب.</p>
+    </section>
+
+    <!-- قسم الشاحنات -->
+    <section class="fleet-container" id="fleet">
+        <h2 class="section-title">أسطول الشاحنات المتاحة</h2>
+        <div class="grid">
+
+            <!-- Mercedes Actros -->
+            <div class="truck-card">
+                <span class="truck-badge">Mercedes-Benz</span>
+                <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80" alt="Actros" class="truck-img">
+                <div class="truck-content">
+                    <h3 class="truck-title">مرسيدس أكتيروس (Actros)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">قوة وكفاءة عالية لمهمات النقل الشاق والطويل.</p>
+                    <div class="truck-specs">
+                        <span><i class="fa-solid fa-engine"></i> 1845 LS</span>
+                        <span><i class="fa-solid fa-weight-hanging"></i> 40 طن</span>
+                    </div>
+                    <button class="btn-whatsapp" onclick="orderTruck('مرسيدس أكتيروس (Actros)')">
+                        <i class="fa-brands fa-whatsapp"></i> اطلب عبر الواتساب
+                    </button>
+                </div>
+            </div>
+
+            <!-- Volvo FH -->
+            <div class="truck-card">
+                <span class="truck-badge">Volvo</span>
+                <img src="https://images.unsplash.com/photo-1586191582056-a15cd3de3d34?auto=format&fit=crop&w=800&q=80" alt="Volvo FH" class="truck-img">
+                <div class="truck-content">
+                    <h3 class="truck-title">فولفو (Volvo FH16)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">قمة الأمان والراحة للرحلات الدولية الطويلة.</p>
+                    <div class="truck-specs">
+                        <span><i class="fa-solid fa-gauge-high"></i> 750 حصان</span>
+                        <span><i class="fa-solid fa-weight-hanging"></i> 50 طن</span>
+                    </div>
+                    <button class="btn-whatsapp" onclick="orderTruck('فولفو (Volvo FH16)')">
+                        <i class="fa-brands fa-whatsapp"></i> اطلب عبر الواتساب
+                    </button>
+                </div>
+            </div>
+
+            <!-- MAN TGX -->
+            <div class="truck-card">
+                <span class="truck-badge">MAN</span>
+                <img src="https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=800&q=80" alt="MAN TGX" class="truck-img">
+                <div class="truck-content">
+                    <h3 class="truck-title">مان (MAN TGX)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">اعتمادية ألمانية فائقة واقتصادية في استهلاك الوقود.</p>
+                    <div class="truck-specs">
+                        <span><i class="fa-solid fa-shield"></i> D38 Engine</span>
+                        <span><i class="fa-solid fa-weight-hanging"></i> 44 طن</span>
+                    </div>
+                    <button class="btn-whatsapp" onclick="orderTruck('مان (MAN TGX)')">
+                        <i class="fa-brands fa-whatsapp"></i> اطلب عبر الواتساب
+                    </button>
+                </div>
+            </div>
+
+            <!-- IVECO S-Way -->
+            <div class="truck-card">
+                <span class="truck-badge">IVECO</span>
+                <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=800&q=80" alt="IVECO S-Way" class="truck-img">
+                <div class="truck-content">
+                    <h3 class="truck-title">إيفيكو (IVECO S-Way)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">تصميم إيطالي عصري وتقنيات متطورة للربط الرقمي.</p>
+                    <div class="truck-specs">
+                        <span><i class="fa-solid fa-bolt"></i> Cursor 13</span>
+                        <span><i class="fa-solid fa-weight-hanging"></i> 38 طن</span>
+                    </div>
+                    <button class="btn-whatsapp" onclick="orderTruck('إيفيكو (IVECO S-Way)')">
+                        <i class="fa-brands fa-whatsapp"></i> اطلب عبر الواتساب
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- سكربت الطلب الديناميكي عبر الواتساب -->
+    <script>
+        // ضع رقم الواتساب الخاص بشركتك هنا (متبوعاً بفيشة الدولة بدون أصفار أو +)
+        const companyPhoneNumber = "966500000000"; 
+
+        function orderTruck(truckModel) {
+            const message = `مرحباً، أود الاستفسار وطلب حجز الشاحنة التالية:\n- الموديل: ${truckModel}\nيرجى تزويدي بالتفاصيل والأسعار.`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${companyPhoneNumber}?text=${encodedMessage}`;
+            
+            // فتح الواتساب في نافذة جديدة
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
